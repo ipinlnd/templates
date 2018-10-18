@@ -78,7 +78,7 @@ end:
 	free(cipher);
 	free(cipher_result);
 	free(encoded_cipher);
-	return 0;
+	return err;
 }
 
 int
@@ -99,7 +99,6 @@ decrypt(char* input, char* output)
 	char *input_string = malloc(strlen(input));
 	char *decoded_input;
 	
-	/* TODO: base64 Decode input*/
 	decoded_input = base64_decode(input);
 	sscanf(decoded_input, "$%d$%d$%*s", &algo_index, &key_index);
 	memcpy(input_string, decoded_input + 5, strlen(decoded_input) - 5);
@@ -123,7 +122,7 @@ end:
 	free(cipher);
 	free(input_string);
 	free(decoded_input);
-	return 0;
+	return err;
 }
 
 int main(int argc, char **argv)
